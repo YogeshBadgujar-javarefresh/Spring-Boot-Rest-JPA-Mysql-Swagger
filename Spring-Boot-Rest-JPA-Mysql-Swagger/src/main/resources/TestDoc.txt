@@ -1,0 +1,15 @@
+For customer related URL
+http://localhost:8080/custSupplierApp/customers
+http://localhost:8080/custSupplierApp/customer/3
+http://localhost:8080/custSupplierApp/customerNumber/1005
+
+Supplier related Rest end points
+http://localhost:8080/custSupplierApp/suppliers
+http://localhost:8080/custSupplierApp/supplierTaxNumber/5511
+http://localhost:8080/custSupplierApp/supplier/1
+
+Swagger UI-
+http://localhost:8080/custSupplierApp/swagger-ui.html
+
+Swagger JSON base
+http://localhost:8080/custSupplierApp/v2/api-docs
