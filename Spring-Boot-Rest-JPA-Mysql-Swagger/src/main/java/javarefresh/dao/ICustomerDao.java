@@ -11,16 +11,16 @@ import javarefresh.exception.DAOException;
 import javarefresh.jpa.Customer;
 
 /**
- * Purpose:
+ * Purpose:Customer DAO related methods.
  *
  * Description:
  *
- * @author Yogesh Badgujar
- * email me in case any problem - badgujar.yogesh@gmail.com
+ * @author Yogesh Badgujar email me in case any problem -
+ *         badgujar.yogesh@gmail.com
  *
  */
 public interface ICustomerDao {
-	
+
 	/**
 	 * Get the list of all customers
 	 * 
@@ -57,5 +57,40 @@ public interface ICustomerDao {
 	 */
 	public List<Customer> getCustomer(Customer customer) throws DAOException;
 
+	/**
+	 * Create the customer.
+	 * 
+	 * @param customerBean - Pass the customer bean.
+	 * @return - Return the response value.
+	 * @throws DAOException - Can throw DAOException if any issue while creating.
+	 */
+	public String createCustomer(Customer customerBean) throws DAOException;
 
+	/**
+	 * Update the customer.
+	 * 
+	 * @param customerBean - Pass the customer bean.
+	 * @return - Return the response value.
+	 * @throws DAOException - Can throw DAOException if any issue while updating.
+	 */
+	public String updateCustomer(Customer customerBean) throws DAOException;
+
+	/**
+	 * Delete the customer.
+	 * 
+	 * @param customerNumb er - Pass the customer number
+	 * @return - Return the status info
+	 * @throws DAOException - Can throw DAOException if any issue while deleting.
+	 */
+	public String deleteCustomer(String customerNumber) throws DAOException;
+
+	/**
+	 * Re-active the customer.
+	 * 
+	 * @param customerNumber - Pass the customer number
+	 * @return - Return the status info
+	 * @throws DAOException - Can throw DAOException if any issue while
+	 *                      reactivating.
+	 */
+	public String reActiveCustomer(String customerNumber) throws DAOException;
 }

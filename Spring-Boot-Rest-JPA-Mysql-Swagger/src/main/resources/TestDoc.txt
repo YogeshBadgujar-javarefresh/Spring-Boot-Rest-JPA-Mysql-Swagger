@@ -2,14 +2,87 @@ For customer related URL
 http://localhost:8080/custSupplierApp/customers
 http://localhost:8080/custSupplierApp/customer/3
 http://localhost:8080/custSupplierApp/customerNumber/1005
+Create
+http://localhost:8080/custSupplierApp/customer --> Json data
+Delete
+http://localhost:8080/custSupplierApp/customers/1005
+Re-activate
+http://localhost:8080/custSupplierApp/customers/1005
+
+
 
 Supplier related Rest end points
 http://localhost:8080/custSupplierApp/suppliers
 http://localhost:8080/custSupplierApp/supplierTaxNumber/5511
 http://localhost:8080/custSupplierApp/supplier/1
 
+Create
+http://localhost:8080/custSupplierApp/supplier --> Json data
+Delete
+http://localhost:8080/custSupplierApp/suppliers/5511
+Re-activate
+http://localhost:8080/custSupplierApp/suppliers/5511
+
 Swagger UI-
 http://localhost:8080/custSupplierApp/swagger-ui.html
 
 Swagger JSON base
 http://localhost:8080/custSupplierApp/v2/api-docs
+
+Sample data -
+{
+        "taxNumber": "2589",
+        "orderLeadInDays": 99,
+        "companyBean": {
+            "areaCode": "7777",
+            "number": "12",
+            "name": "MCB Core infotech",
+            "registrationNumber": "MCB-789"
+        },
+        "createdBy": "Yogesh",
+        "modifyBy": "Yogesh"
+        
+    }
+    
+    
+    {
+	
+	"createdBy": "chetan",  
+    "modifyBy": "chetan",   
+    "taxNumber": "YOGE",
+    "orderLeadInDays": 70,
+    "personBean": {
+    	"firstName": "Chetan",
+    	"lastName": "Badgujar",
+        "areaCode": "72",
+        "number": "1-7711"
+    }
+}
+
+{
+        "customerNumber": "G2Tech0014",
+    "lastOrderDate": "2020-06-25",
+        "companyBean": {
+            "areaCode": "7777",
+            "number": "12",
+            "name": "MCB Core infotech",
+            "registrationNumber": "MCB-789"
+        },
+        "createdBy": "Yogesh",
+        "modifyBy": "Yogesh"
+        
+    }
+
+{
+	
+	"createdBy": "chetan",  
+    "modifyBy": "chetan",   
+    "customerNumber": "YOGE",
+    "lastOrderDate": "2020-06-23",
+    "personBean": {
+    	"firstName": "Chetan",
+    	"lastName": "Badgujar",
+        "areaCode": "72",
+        "number": "1-7711"
+    }
+}

@@ -15,12 +15,12 @@ import javarefresh.jpa.Supplier;
  *
  * Description:
  *
- * @author Yogesh Badgujar
- * email me in case any problem - badgujar.yogesh@gmail.com
+ * @author Yogesh Badgujar email me in case any problem -
+ *         badgujar.yogesh@gmail.com
  *
  */
 public interface ISupplierDao {
-	
+
 	/**
 	 * Get the list of all supplier
 	 * 
@@ -40,6 +40,7 @@ public interface ISupplierDao {
 
 	/**
 	 * Pass the tax Number and get the particular supplier.
+	 * 
 	 * @param taxNumber - Pass tax Number.
 	 * @return - Return SupplierBean.
 	 * @throws DAOException - Can throw DAOException.
@@ -56,5 +57,41 @@ public interface ISupplierDao {
 	 */
 	public List<Supplier> getSupplier(Supplier supplier) throws DAOException;
 
+	/**
+	 * Create the Supplier.
+	 * 
+	 * @param supplier - Pass the Supplier bean.
+	 * @return - Return the response code.
+	 * @throws DAOException - Can throw DAOException if any issue while creating.
+	 */
+	public String createSupplier(Supplier supplier) throws DAOException;
+
+	/**
+	 * Update the supplier.
+	 * 
+	 * @param supplier - Pass the Supplier bean.
+	 * @return - Return the response code.
+	 * @throws DAOException - Can throw DAOException if any issue while updating.
+	 */
+	public String updateSupplier(Supplier supplier) throws DAOException;
+
+	/**
+	 * Soft delete of supplier.
+	 * 
+	 * @param taxNumber - Pass the tax Number
+	 * @return - Return the status info
+	 * @throws DAOException - Can throw DAOException if any issue while deleting.
+	 */
+	public String deleteSupplier(String taxNumber) throws DAOException;
+
+	/**
+	 * Re-active the supplier soft deactivate .
+	 * 
+	 * @param taxNumber - Pass the tax Number
+	 * @return - Return the status info
+	 * @throws DAOException - Can throw DAOException if any issue while
+	 *                      reactivating.
+	 */
+	public String reActiveSupplier(String taxNumber) throws DAOException;
 
 }

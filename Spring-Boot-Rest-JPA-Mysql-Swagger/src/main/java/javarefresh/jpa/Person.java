@@ -7,13 +7,14 @@ package javarefresh.jpa;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 /**
  * Purpose:
  *
@@ -32,11 +33,17 @@ public class Person extends GenericFields implements Serializable {
 	@Column(name = "first_name", length = 25, nullable = false)
 	private String firstName;
 
-	@Column(name = "last_name",  length = 25, nullable = false)
+	@Column(name = "last_name", length = 25, nullable = false)
 	private String lastName;
-	
-	@OneToOne
-	@JoinColumn(name="phone_details_id")
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "person")
+	private Customer customer;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "person")
+	private Supplier supplier;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "phone_details_id", nullable = false)
 	private PhoneNumber phoneNumber;
 
 	public Person() {
@@ -65,6 +72,22 @@ public class Person extends GenericFields implements Serializable {
 		this.lastName = lastName;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
 	public PhoneNumber getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -72,4 +95,5 @@ public class Person extends GenericFields implements Serializable {
 	public void setPhoneNumber(PhoneNumber phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
 }

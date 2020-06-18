@@ -6,6 +6,7 @@
 package javarefresh.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javarefresh.dao.ICustomerDao;
 import javarefresh.exception.CustomerSupplierException;
 import javarefresh.exception.DAOException;
+import javarefresh.jpa.Company;
 import javarefresh.jpa.Customer;
+import javarefresh.jpa.Person;
+import javarefresh.jpa.PhoneNumber;
 import javarefresh.model.CustomerBean;
 import javarefresh.model.SearchCustomer;
 import javarefresh.util.CustomerSupplierUtil;
@@ -30,7 +34,7 @@ import javarefresh.util.CustomerSupplierUtil;
  *
  */
 @Service
-@Transactional //for future
+@Transactional // for future
 public class CustomerService implements ICustomerService {
 
 	@Autowired
@@ -111,14 +115,14 @@ public class CustomerService implements ICustomerService {
 		List<CustomerBean> customers = new ArrayList<>();
 		try {
 			Customer tempCustomer = new Customer();
-			if(customer.getId() != 0) {
+			if (customer.getId() != 0) {
 				tempCustomer.setId(customer.getId());
 			}
-			if(customer.getCustomerNumber() != null) {
+			if (customer.getCustomerNumber() != null) {
 				tempCustomer.setCustomerNumber(customer.getCustomerNumber());
 			}
 			tempCustomer.setWithAndCondition(customer.getWithAndCondition());
-			
+
 			List<Customer> custList = customerDao.getCustomer(tempCustomer);
 			if (!custList.isEmpty()) {
 				custList.stream().forEach(x -> {
@@ -132,6 +136,117 @@ public class CustomerService implements ICustomerService {
 		}
 
 		return customers;
+	}
+
+	// Create, update, delete, re-active customers
+	/**
+	 * Create the customer.
+	 * 
+	 * @param customerBean - Pass the customer bean.
+	 * @return - Return the response code.
+	 * @throws CustomerSupplierException - Can throw CustomerSupplierException if
+	 *                                   any issue while creating.
+	 */
+	public String createCustomer(CustomerBean customerBean) throws CustomerSupplierException {
+		String message = null;
+		try {
+			Customer tempCustomer = new Customer();
+			tempCustomer.setCustomerNumber(customerBean.getCustomerNumber());
+			tempCustomer.setLastOrderDate(customerBean.getLastOrderDate());
+			tempCustomer.setCreatedBy(customerBean.getCreatedBy());
+			tempCustomer.setCreatedDate(new Date());
+			tempCustomer.setModifyBy(customerBean.getCreatedBy());
+			tempCustomer.setModifyDate(new Date());
+			tempCustomer.setActive(1);
+			if (customerBean.getPersonBean() != null) {
+				Person person = new Person();
+				person.setFirstName(customerBean.getPersonBean().getFirstName());
+				person.setLastName(customerBean.getPersonBean().getLastName());
+				person.setCreatedBy(customerBean.getCreatedBy());
+				person.setCreatedDate(new Date());
+				person.setModifyBy(customerBean.getCreatedBy());
+				person.setModifyDate(new Date());
+				PhoneNumber phoneNumber = new PhoneNumber();
+				phoneNumber.setAreaCode(customerBean.getPersonBean().getAreaCode());
+				phoneNumber.setNumber(customerBean.getPersonBean().getNumber());
+				phoneNumber.setCreatedBy(customerBean.getCreatedBy());
+				phoneNumber.setCreatedDate(new Date());
+				phoneNumber.setModifyBy(customerBean.getCreatedBy());
+				phoneNumber.setModifyDate(new Date());
+				person.setPhoneNumber(phoneNumber);
+				tempCustomer.setPerson(person);
+			} else {
+				Company company = new Company();
+				company.setName(customerBean.getCompanyBean().getName());
+				company.setRegistrationNumber(customerBean.getCompanyBean().getRegistrationNumber());
+				company.setCreatedBy(customerBean.getCreatedBy());
+				company.setCreatedDate(new Date());
+				company.setModifyBy(customerBean.getCreatedBy());
+				company.setModifyDate(new Date());
+				PhoneNumber phoneNumber = new PhoneNumber();
+				phoneNumber.setAreaCode(customerBean.getCompanyBean().getAreaCode());
+				phoneNumber.setNumber(customerBean.getCompanyBean().getNumber());
+				phoneNumber.setCreatedBy(customerBean.getCreatedBy());
+				phoneNumber.setCreatedDate(new Date());
+				phoneNumber.setModifyBy(customerBean.getCreatedBy());
+				phoneNumber.setModifyDate(new Date());
+				company.setPhoneNumber(phoneNumber);
+				tempCustomer.setCompany(company);
+			}
+			message = customerDao.createCustomer(tempCustomer);
+		} catch (DAOException e) {
+			throw new CustomerSupplierException(CustomerSupplierUtil.buildMessageWithCause(e.getCause()));
+		}
+
+		return message;
+	}
+
+	/**
+	 * Update the customer.
+	 * 
+	 * @param customerBean - Pass the customer bean.
+	 * @return - Return the response code.
+	 * @throws CustomerSupplierException - Can throw CustomerSupplierException if
+	 *                                   any issue while updating.
+	 */
+	public String updateCustomer(CustomerBean customerBean) throws CustomerSupplierException {
+		return null;
+	}
+
+	/**
+	 * Delete the customer.
+	 * 
+	 * @param customerNumber - Pass the customer number
+	 * @return - Return the status info
+	 * @throws CustomerSupplierException - Can throw CustomerSupplierException if
+	 *                                   any issue while deleting.
+	 */
+	public String deleteCustomer(String customerNumber) throws CustomerSupplierException {
+		String message = null;
+		try {
+			message = customerDao.deleteCustomer(customerNumber);
+		} catch (DAOException e) {
+			throw new CustomerSupplierException(CustomerSupplierUtil.buildMessageWithCause(e.getCause()));
+		}
+		return message;
+	}
+
+	/**
+	 * Re-active the customer.
+	 * 
+	 * @param customerNumber - Pass the customer number
+	 * @return - Return the status info
+	 * @throws CustomerSupplierException - Can throw CustomerSupplierException if
+	 *                                   any issue while re-activting.
+	 */
+	public String reActiveCustomer(String customerNumber) throws CustomerSupplierException {
+		String message = null;
+		try {
+			message = customerDao.reActiveCustomer(customerNumber);
+		} catch (DAOException e) {
+			throw new CustomerSupplierException(CustomerSupplierUtil.buildMessageWithCause(e.getCause()));
+		}
+		return message;
 	}
 
 }

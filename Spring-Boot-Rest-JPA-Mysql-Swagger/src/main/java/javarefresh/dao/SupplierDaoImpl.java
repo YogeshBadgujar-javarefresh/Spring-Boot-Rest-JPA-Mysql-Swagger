@@ -29,6 +29,7 @@ import javarefresh.jpa.Supplier;
 public class SupplierDaoImpl extends CommonDao implements ISupplierDao {
 
 	private static Logger logger = Logger.getLogger(SupplierDaoImpl.class.getName());
+	private final static String STATUS = "sucess";
 
 	/**
 	 * Get the list of all supplier
@@ -95,16 +96,72 @@ public class SupplierDaoImpl extends CommonDao implements ISupplierDao {
 			}
 			if (id != null & taxNo != null) {
 				criteria.add(Restrictions.or(id, taxNo));
-			}else {
-				if(supplier.getId() != null) {
+			} else {
+				if (supplier.getId() != null) {
 					criteria.add(Restrictions.eq("id", supplier.getId()));
 				}
-				if(supplier.getTaxNumber() != null) {
+				if (supplier.getTaxNumber() != null) {
 					criteria.add(Restrictions.eq("taxNumber", supplier.getTaxNumber()));
 				}
 			}
 		}
-		//TODO Need to refine the above logic for cut shot
+		// TODO Need to refine the above logic for cut shot
 		return (List<Supplier>) criteria.list();
+	}
+
+	/**
+	 * Create the Supplier.
+	 * 
+	 * @param supplier - Pass the Supplier bean.
+	 * @return - Return the response code.
+	 * @throws DAOException - Can throw DAOException if any issue while creating.
+	 */
+	public String createSupplier(Supplier supplier) throws DAOException {
+		getSessionFactory().getCurrentSession().save(supplier);
+		return STATUS;
+	}
+
+	/**
+	 * Update the supplier.
+	 * 
+	 * @param supplier - Pass the Supplier bean.
+	 * @return - Return the response code.
+	 * @throws DAOException - Can throw DAOException if any issue while updating.
+	 */
+	public String updateSupplier(Supplier supplier) throws DAOException {
+		return null;
+	}
+
+	/**
+	 * Soft delete of supplier.
+	 * 
+	 * @param taxNumber - Pass the tax Number
+	 * @return - Return the status info
+	 * @throws DAOException - Can throw DAOException if any issue while deleting.
+	 */
+	public String deleteSupplier(String taxNumber) throws DAOException {
+		Supplier supplier = getSupplierByTaxNumber(taxNumber);
+		supplier.setActive(0);
+		supplier.setVersion(supplier.getVersion() + 1);
+		getSessionFactory().getCurrentSession().update(supplier);
+		return STATUS;
+	}
+
+	/**
+	 * Re-active the supplier soft deactivate .
+	 * 
+	 * @param taxNumber - Pass the tax Number
+	 * @return - Return the status info
+	 * @throws DAOException - Can throw DAOException if any issue while
+	 *                      reactivating.
+	 */
+	public String reActiveSupplier(String taxNumber) throws DAOException {
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Supplier.class);
+		criteria.add(Restrictions.eq("taxNumber", taxNumber));
+		Supplier supplier = (Supplier) criteria.uniqueResult();
+		supplier.setActive(1);
+		supplier.setVersion(supplier.getVersion() + 1);
+		getSessionFactory().getCurrentSession().update(supplier);
+		return STATUS;
 	}
 }

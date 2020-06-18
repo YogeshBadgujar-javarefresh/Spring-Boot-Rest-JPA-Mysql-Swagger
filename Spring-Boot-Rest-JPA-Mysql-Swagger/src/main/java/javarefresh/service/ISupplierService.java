@@ -56,5 +56,46 @@ public interface ISupplierService {
 	 * @throws CustomerSupplierException
 	 */
 	public List<SupplierBean> getSupplier(SearchSupplier supplier) throws CustomerSupplierException;
+	
+	/**
+	 * Create the Supplier.
+	 * 
+	 * @param supplierBean - Pass the Supplier bean.
+	 * @return - Return the response code.
+	 * @throws CustomerSupplierException - Can throw CustomerSupplierException if
+	 *                                   any issue while creating.
+	 */
+	public String createSupplier(SupplierBean supplierBean) throws CustomerSupplierException;
+	
+	/**
+	 * Update the supplier.
+	 * 
+	 * @param supplierBean - Pass the Supplier bean.
+	 * @return - Return the response code.
+	 * @throws CustomerSupplierException - Can throw CustomerSupplierException if
+	 *                                   any issue while updating.
+	 */
+	public String updateSupplier(SupplierBean supplierBean) throws CustomerSupplierException;
+	
+	/**
+	 * Soft delete of supplier.
+	 * 
+	 * @param taxNumber - Pass the tax Number
+	 * @return - Return the status info
+	 * @throws CustomerSupplierException - Can throw CustomerSupplierException if
+	 *                                   any issue while deleting.
+	 */
+	public String deleteSupplier(String taxNumber) throws CustomerSupplierException;
+	
+	/**
+	 * Re-active the supplier soft deactivate .
+	 * 
+	* @param taxNumber - Pass the tax Number
+	 * @return - Return the status info
+	 * @throws CustomerSupplierException - Can throw CustomerSupplierException if
+	 *                                   any issue while reactivating.
+	 */
+	public String reActiveSupplier(String taxNumber) throws CustomerSupplierException;
+	
 
 }

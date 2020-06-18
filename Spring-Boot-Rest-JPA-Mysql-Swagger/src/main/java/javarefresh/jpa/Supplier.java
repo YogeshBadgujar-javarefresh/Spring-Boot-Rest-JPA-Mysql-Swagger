@@ -7,8 +7,10 @@ package javarefresh.jpa;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -37,12 +39,12 @@ public class Supplier extends GenericFields implements Serializable {
 	@Column(name = "order_lead_days", length = 5, nullable = false)
 	private Integer orderLeadDays;
 
-	@OneToOne
-	@JoinColumn(name="person_id")
+	@OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name = "person_id")
 	private Person person;
 
-	@OneToOne
-	@JoinColumn(name="company_id")
+	@OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name = "company_id")
 	private Company company;
 
 	@Transient // Set the AND / OR condition

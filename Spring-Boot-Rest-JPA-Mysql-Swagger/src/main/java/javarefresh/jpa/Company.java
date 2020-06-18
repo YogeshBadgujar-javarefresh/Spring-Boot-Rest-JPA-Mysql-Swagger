@@ -7,11 +7,11 @@ package javarefresh.jpa;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,8 +36,14 @@ public class Company extends GenericFields implements Serializable {
 	@Column(name = "registration_number", length = 100, nullable = false)
 	private String registrationNumber;
 
-	@OneToOne
-	@JoinColumn(name="phone_details_id")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "company")
+	private Customer customer;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "company")
+	private Supplier supplier;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "phone_details_id", nullable = false)
 	private PhoneNumber phoneNumber;
 
 	public Company() {
@@ -64,6 +70,22 @@ public class Company extends GenericFields implements Serializable {
 
 	public void setRegistrationNumber(String registrationNumber) {
 		this.registrationNumber = registrationNumber;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 	public PhoneNumber getPhoneNumber() {

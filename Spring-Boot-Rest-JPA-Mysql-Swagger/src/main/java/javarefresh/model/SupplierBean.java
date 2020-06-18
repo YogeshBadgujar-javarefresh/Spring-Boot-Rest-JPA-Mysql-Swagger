@@ -17,7 +17,7 @@ import java.io.Serializable;
  *         badgujar.yogesh@gmail.com
  *
  */
-public class SupplierBean implements Serializable {
+public class SupplierBean extends GenericBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	// Id of the supplier

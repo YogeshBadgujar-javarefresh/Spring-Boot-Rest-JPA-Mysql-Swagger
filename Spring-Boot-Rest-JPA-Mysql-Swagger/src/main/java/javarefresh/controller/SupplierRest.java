@@ -9,8 +9,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,9 +59,32 @@ public class SupplierRest {
 
 	@RequestMapping(value = "/suppliers", method = RequestMethod.POST, headers = { "Content-type=application/json" })
 	@ResponseBody
-	public List<SupplierBean> getSupplier(@RequestBody SearchSupplier searchSupplier)
-			throws CustomerSupplierException {
+	public List<SupplierBean> getSupplier(@RequestBody SearchSupplier searchSupplier) throws CustomerSupplierException {
 		return supplierService.getSupplier(searchSupplier);
+	}
+
+	// Create, update, delete, re-active supplier
+	@RequestMapping(value = "/supplier", method = RequestMethod.POST, headers = { "Content-type=application/json" })
+	public String createSupplier(@RequestBody SupplierBean supplierBean) throws CustomerSupplierException {
+		// TODO - Need to pretty message if you add Person and Company data at a time.
+		return supplierService.createSupplier(supplierBean);
+	}
+
+	@RequestMapping(value = "/suppliers", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
+	public String updateSupplier(@RequestBody SupplierBean supplierBean) throws CustomerSupplierException {
+		return supplierService.updateSupplier(supplierBean);
+	}
+
+	@DeleteMapping(value = "/suppliers/{taxNumber}")
+	@ResponseBody
+	public String deleteCustomer(@PathVariable String taxNumber) throws CustomerSupplierException {
+		return supplierService.deleteSupplier(taxNumber);
+	}
+
+	@PutMapping(value = "/suppliers/{taxNumber}")
+	@ResponseBody
+	public String reActiveCustomer(@PathVariable String taxNumber) throws CustomerSupplierException {
+		return supplierService.reActiveSupplier(taxNumber);
 	}
 
 }

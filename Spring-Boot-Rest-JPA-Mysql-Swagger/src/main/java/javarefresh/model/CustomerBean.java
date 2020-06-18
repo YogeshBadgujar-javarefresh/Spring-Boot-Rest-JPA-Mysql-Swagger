@@ -17,7 +17,7 @@ import java.util.Date;
  *         badgujar.yogesh@gmail.com
  *
  */
-public class CustomerBean implements Serializable {
+public class CustomerBean extends GenericBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	// Id of the Customer

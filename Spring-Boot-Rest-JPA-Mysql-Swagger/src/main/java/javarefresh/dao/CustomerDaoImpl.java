@@ -31,6 +31,7 @@ import javarefresh.jpa.Customer;
 public class CustomerDaoImpl extends CommonDao implements ICustomerDao {
 
 	private static Logger logger = Logger.getLogger(CustomerDaoImpl.class.getName());
+	private final static String STATUS = "sucess";
 
 	/**
 	 * Get the list of all customers
@@ -108,6 +109,63 @@ public class CustomerDaoImpl extends CommonDao implements ICustomerDao {
 			}
 		}
 		return (List<Customer>) criteria.list();
+	}
+
+	// Create, update, delete, re-active customers
+	/**
+	 * Create the customer.
+	 * 
+	 * @param customerBean - Pass the customer bean.
+	 * @return - Return the response code.
+	 * @throws DAOException - Can throw DAOException if any issue while creating.
+	 */
+	public String createCustomer(Customer customer) throws DAOException {
+		getSessionFactory().getCurrentSession().save(customer);
+		return STATUS;
+	}
+
+	/**
+	 * Update the customer.
+	 * 
+	 * @param customerBean - Pass the customer bean.
+	 * @return - Return the response code.
+	 * @throws DAOException - Can throw DAOException if any issue while updating.
+	 */
+	public String updateCustomer(Customer customerBean) throws DAOException {
+		return STATUS;
+	}
+
+	/**
+	 * Delete the customer.
+	 * 
+	 * @param customerNumber - Pass the customer number
+	 * @return - Return the status info
+	 * @throws DAOException - Can throw DAOException if any issue while deleting.
+	 */
+	public String deleteCustomer(String customerNumber) throws DAOException {
+		Customer customer = getCustomerByCustomerNumber(customerNumber);
+		customer.setActive(0);
+		customer.setVersion(customer.getVersion() + 1);
+		getSessionFactory().getCurrentSession().update(customer);
+		return STATUS;
+	}
+
+	/**
+	 * Re-active the customer.
+	 * 
+	 * @param customerNumber - Pass the customer number
+	 * @return - Return the status info
+	 * @throws DAOException - Can throw DAOException if any issue while
+	 *                      reactivating.
+	 */
+	public String reActiveCustomer(String customerNumber) throws DAOException {
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Customer.class);
+		criteria.add(Restrictions.eq("customerNumber", customerNumber));
+		Customer customer = (Customer) criteria.uniqueResult();
+		customer.setActive(1);
+		customer.setVersion(customer.getVersion() + 1);
+		getSessionFactory().getCurrentSession().update(customer);
+		return STATUS;
 	}
 
 }

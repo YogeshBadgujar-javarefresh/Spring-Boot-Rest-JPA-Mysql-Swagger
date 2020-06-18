@@ -31,9 +31,11 @@ public class GenericFields implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID" ,length=20, unique=true, nullable = false)
 	private Long id;
 
 	@Version
+	@Column(name = "version" ,length=10, nullable = false)
 	private Integer version;
 
 	@Column(name = "CREATED_BY", length = 10, nullable = false)
