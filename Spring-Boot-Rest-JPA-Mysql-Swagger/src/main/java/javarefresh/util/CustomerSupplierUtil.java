@@ -35,6 +35,10 @@ public class CustomerSupplierUtil {
 		bean.setId(customer.getId());
 		bean.setCustomerNumber(customer.getCustomerNumber());
 		bean.setLastOrderDate(customer.getLastOrderDate());
+		bean.setCreatedBy(customer.getCreatedBy());
+		bean.setCreatedDate(customer.getCreatedDate());
+		bean.setModifyBy(customer.getModifyBy());
+		bean.setModifyDate(customer.getModifyDate());
 		if (customer.getCompany() != null) {
 			Company company = customer.getCompany();
 			bean.setCompanyBean(fillCompanyBean(company));
@@ -49,6 +53,10 @@ public class CustomerSupplierUtil {
 		bean.setId(supplier.getId());
 		bean.setTaxNumber(supplier.getTaxNumber());
 		bean.setOrderLeadInDays(supplier.getOrderLeadDays());
+		bean.setCreatedBy(supplier.getCreatedBy());
+		bean.setCreatedDate(supplier.getCreatedDate());
+		bean.setModifyBy(supplier.getModifyBy());
+		bean.setModifyDate(supplier.getModifyDate());
 		if (supplier.getCompany() != null) {
 			Company company = supplier.getCompany();
 			bean.setCompanyBean(fillCompanyBean(company));

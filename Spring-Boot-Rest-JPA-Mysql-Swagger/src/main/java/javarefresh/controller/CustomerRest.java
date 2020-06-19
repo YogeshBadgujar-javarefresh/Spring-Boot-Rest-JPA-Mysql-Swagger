@@ -44,13 +44,13 @@ public class CustomerRest {
 		return customerService.getAllCustomer();
 	}
 
-	@GetMapping(value = "/customers/{id}")
+	@GetMapping(value = "/customer/{id}")
 	@ResponseBody
 	public CustomerBean getCustomerById(@PathVariable Long id) throws CustomerSupplierException {
 		return customerService.getCustomerById(id);
 	}
 
-	@GetMapping(value = "/customers/{customerNumber}")
+	@GetMapping(value = "/customerNumber/{customerNumber}")
 	@ResponseBody
 	public CustomerBean getCustomerByCustomerNumber(@PathVariable String customerNumber)
 			throws CustomerSupplierException {
@@ -73,18 +73,18 @@ public class CustomerRest {
 		return customerService.createCustomer(customerBean);
 	}
 
-	@RequestMapping(value = "/customers", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
+	@RequestMapping(value = "/customer", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
 	public String updateCustomer(@RequestBody CustomerBean customerBean) throws CustomerSupplierException {
 		return customerService.updateCustomer(customerBean);
 	}
 
-	@DeleteMapping(value = "/customers/{customerNumber}")
+	@DeleteMapping(value = "/customer/{customerNumber}")
 	@ResponseBody
 	public String deleteCustomer(@PathVariable String customerNumber) throws CustomerSupplierException {
 		return customerService.deleteCustomer(customerNumber);
 	}
 
-	@PutMapping(value = "/customers/{customerNumber}")
+	@PutMapping(value = "/customer/{customerNumber}")
 	@ResponseBody
 	public String reActiveCustomer(@PathVariable String customerNumber) throws CustomerSupplierException {
 		return customerService.reActiveCustomer(customerNumber);

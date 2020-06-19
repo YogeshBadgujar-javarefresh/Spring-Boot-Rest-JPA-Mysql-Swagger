@@ -70,18 +70,18 @@ public class SupplierRest {
 		return supplierService.createSupplier(supplierBean);
 	}
 
-	@RequestMapping(value = "/suppliers", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
+	@RequestMapping(value = "/supplier", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
 	public String updateSupplier(@RequestBody SupplierBean supplierBean) throws CustomerSupplierException {
 		return supplierService.updateSupplier(supplierBean);
 	}
 
-	@DeleteMapping(value = "/suppliers/{taxNumber}")
+	@DeleteMapping(value = "/supplier/{taxNumber}")
 	@ResponseBody
 	public String deleteCustomer(@PathVariable String taxNumber) throws CustomerSupplierException {
 		return supplierService.deleteSupplier(taxNumber);
 	}
 
-	@PutMapping(value = "/suppliers/{taxNumber}")
+	@PutMapping(value = "/supplier/{taxNumber}")
 	@ResponseBody
 	public String reActiveCustomer(@PathVariable String taxNumber) throws CustomerSupplierException {
 		return supplierService.reActiveSupplier(taxNumber);
