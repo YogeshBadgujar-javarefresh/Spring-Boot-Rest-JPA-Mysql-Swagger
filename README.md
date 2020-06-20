@@ -8,26 +8,35 @@ and a customer at the same time. For this implementation assume all fields are r
 REST API will fetch data from different layers i.e. Service and DAO layer.<br>
 
 <b>Technologies -</b> Java, Spring Boot, Spring JPA, Spring REST, Swagger or Postman for testing, Mysql DB, Maven for build.<br>
+<b>REST API</b>
+<table>
+  <tr>
+  <th>RESTful URL</th>
+  <th>HTTP Action</th>
+  <th>Business Operation/Description</th>
+  </tr>
+  <tr><td colspan="3"><b>Customer Rest API end points</b></td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/customers</td><td>GET</td><td>Get all customers</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/customer/{id}</td><td>GET</td><td>Get the customer by id</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/customerNumber/{customerNumber}</td><td>GET</td><td>Get the customer by customer number</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/customers</td><td>POST</td><td>Search by id, customer number Provide the JSON data in SearchCustomer bean</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/customer</td><td>POST</td><td>Save customer - pass CustomerBean JSON </td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/customer</td><td>PUT</td><td>Update customer - pass CustomerBean JSON --TODO - Not implement </td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/customer/{customerNumber}</td><td>DELETE</td><td>Soft delete customer</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/customer/{customerNumber}</td><td>PUT</td><td>Re-active customer</td></tr>
 
-<b>Customer Rest API end points -</b><br>
-GET - http://localhost:8080/custSupplierApp/customers - Get all customers <br>
-GET - http://localhost:8080/custSupplierApp/customer/{id} - Get the customer by id <br>
-GET - http://localhost:8080/custSupplierApp/customerNumber/{customerNumber} - Get the customer by customer number <br>
-POST - http://localhost:8080/custSupplierApp/customers - Search by id, customer number Provide the JSON data in SearchCustomer bean<br>
-POST - http://localhost:8080/custSupplierApp/customer - Save customer - pass CustomerBean JSON <br>
-PUT - http://localhost:8080/custSupplierApp/customer - Update customer - pass CustomerBean JSON --TODO - Not implement <br>
-DELETE - http://localhost:8080/custSupplierApp/customer/{customerNumber} - Soft delete customer <br>
-PUT - http://localhost:8080/custSupplierApp/customer/{customerNumber} - Re-active customer <br>
+<tr><td colspan="3"><b>Supplier Rest API end points</b></td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/suppliers</td><td>GET</td><td>Get all suppliers</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/supplier/{id}</td><td>GET</td><td>Get the supplier by id</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/supplierTaxNumber/{taxNumber}</td><td>GET</td><td>Get the supplier by tax number</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/suppliers</td><td>POST</td><td>Search by id, tax number Provide the JSON data in SearchSupplier bean</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/supplier</td><td>POST</td><td>Save supplier -  pass SupplierBean JSON </td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/supplier/</td><td>PUT</td><td>Update supplier - pass SupplierBean JSON--TODO - Not implement</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/supplier/{taxNumber}</td><td>DELETE</td><td>Soft delete supplier</td></tr>
+<tr><td>http://localhost:8080/custSupplierApp/supplier/{taxNumber}</td><td>PUT</td><td>Re-active supplier</td></tr>
 
-<b>Supplier Rest API end points -</b><br>
-GET - http://localhost:8080/custSupplierApp/suppliers - Get all suppliers <br>
-GET - http://localhost:8080/custSupplierApp/supplier/{id} - Get the supplier by id <br>
-GET - http://localhost:8080/custSupplierApp/supplierTaxNumber/{taxNumber} - Get the supplier by tax number <br>
-POST - http://localhost:8080/custSupplierApp/suppliers - Search by id, tax number Provide the JSON data in SearchSupplier bean <br>
-POST - http://localhost:8080/custSupplierApp/supplier - Save supplier -  pass SupplierBean JSON <br>
-PUT - http://localhost:8080/custSupplierApp/supplier/- Update supplier - pass SupplierBean JSON--TODO - Not implement <br>
-DELETE - http://localhost:8080/custSupplierApp/supplier/{taxNumber} - Soft delete supplier <br>
-PUT - http://localhost:8080/custSupplierApp/supplier/{taxNumber} - Re-active supplier <br>
+  </table>
+
 
 <b>Testing -</b><br>
 Swagger UI -<br>
